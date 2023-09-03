@@ -1,0 +1,31 @@
+{
+    "data": {
+        "history": [
+            {
+                "name": "株式会社ZOZO",
+                "date": "2022/03~",
+                "content": "Androidやった",
+                "type": "now"
+            },
+            {
+                "name": "からくり株式会社",
+                "date": "2020/06~2022/02",
+                "content": "様々なプロジェクトを通して、iOS/Androidのモバイルアプリ開発に携わる",
+                "type": "before"
+            },
+            {
+                "name": "株式会社SCSK",
+                "date": "2020/06~2022/02",
+                "content": "通信事業会社のバックオフィスシステム開発をJava,C言語で担当",
+                "type": "before"
+            }
+            ,
+            {
+                "name": "東京理科大学理工学部",
+                "date": "2014/04~2018/03",
+                "content": "機械学習やプログラミングを学んだ",
+                "type": "college"
+            }
+        ]
+    }
+}

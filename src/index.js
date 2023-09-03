@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Timeline from './Timeline';
+import Profile from './Profile'
+import OfficialOutputs from './OfficialOutput';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Profile />
+    <h2 style={{ padding: '5% 0% 0% 35%' }}>Career</h2>
+    <Timeline />
+    <h2 style={{ padding: '5% 0% 0% 35%' }}>Outputs</h2>
+    <OfficialOutputs />
   </React.StrictMode>
 );
 
