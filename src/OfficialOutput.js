@@ -1,19 +1,31 @@
 import * as React from 'react';
+import useMedia from "use-media";
 import Data from './officialOutput.json'
 
 export default function OfficialOutputs() {
   var list = [];
+  const isWide = useMedia({ minWidth: "480px" });
   const textStyle = {
     textAlign: 'left',
     paddingLeft: '8px',
     paddingRight: '8px'
   }
 
-  const divStyle = {
+  const divPCStyle = {
     textAlign: 'center', 
     border: 'solid', 
     borderColor: '#d3d3d3', 
     margin: '20px 35%', 
+    boxShadow: '10px 10px 15px -10px', 
+    borderRadius: '10px', 
+    cursor: 'pointer'
+  }
+
+  const divSPStyle = {
+    textAlign: 'center', 
+    border: 'solid', 
+    borderColor: '#d3d3d3', 
+    margin: '20px 15%', 
     boxShadow: '10px 10px 15px -10px', 
     borderRadius: '10px', 
     cursor: 'pointer'
@@ -25,7 +37,7 @@ export default function OfficialOutputs() {
     };
 
     list.push(
-      <div style={divStyle} onClick={click}
+      <div style={isWide ? divPCStyle : divSPStyle} onClick={click}
         role="button"
         tabIndex="0"
         onKeyDown={(e) => {

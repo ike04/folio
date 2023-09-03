@@ -3,27 +3,31 @@
         "history": [
             {
                 "name": "株式会社ZOZO",
-                "date": "2022/03~",
-                "content": "Androidやった",
+                "startDate": "2022/03",
+                "endDate": "",
+                "content": "ZOZOTOWN Androidアプリの開発や仕様調整を担当",
                 "type": "now"
             },
             {
                 "name": "からくり株式会社",
-                "date": "2020/06~2022/02",
+                "startDate": "2020/06",
+                "endDate": "2022/02",
                 "content": "様々なプロジェクトを通して、iOS/Androidのモバイルアプリ開発に携わる",
                 "type": "before"
             },
             {
                 "name": "株式会社SCSK",
-                "date": "2020/06~2022/02",
+                "startDate": "2018/04",
+                "endDate": "2020/05",
                 "content": "通信事業会社のバックオフィスシステム開発をJava,C言語で担当",
                 "type": "before"
             }
             ,
             {
                 "name": "東京理科大学理工学部",
-                "date": "2014/04~2018/03",
-                "content": "機械学習やプログラミングを学んだ",
+                "startDate": "2014/04",
+                "endDate": "2018/03",
+                "content": "プログラミングや簿記、統計を履修。卒業研究ではスマートウォッチアプリと機械学習を用いた研究を行った",
                 "type": "college"
             }
         ]

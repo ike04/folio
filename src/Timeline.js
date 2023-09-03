@@ -40,13 +40,11 @@ export default function BasicTimeline() {
           variant="body2"
           color="text.secondary"
         >
-          {data.date}
+          {data.startDate}~<br></br>{data.endDate}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
-          {/* <TimelineDot color="primary"> */}
             {icon(data.type)}
-          {/* </TimelineDot> */}
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
