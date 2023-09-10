@@ -16,6 +16,21 @@ import SchoolIcon from '@mui/icons-material/School';
 import Data from './json/timeline.json'
 
 export default function BasicTimeline() {
+  const divPCStyle = {
+    border: 'none',
+    borderColor: '#d3d3d3',
+    borderRadius: '10px',
+    margin: '0px 25% 0px 25%',
+    backgroundColor: '#f0f0f0'
+}
+
+const divSPStyle = {
+  border: 'none',
+  borderColor: '#d3d3d3',
+  borderRadius: '10px',
+  margin: '0px 2% 0px 2%',
+  backgroundColor: '#f0f0f0'
+}
   const isWide = useMedia({ minWidth: "480px" });
   var list = [];
   const history = Data.data.history;
@@ -54,15 +69,16 @@ export default function BasicTimeline() {
           {data.startDate}~<br></br>{data.endDate}
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineConnector/>
+          <TimelineConnector />
           {icon(data.type)}
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
-          <Typography variant="h6" component="span">
+          <br></br>
+          <Typography variant="body1" component="span">
             {data.name}
           </Typography>
-          <Typography variant='body1'>
+          <Typography variant='body2'>
             {data.content}
           </Typography>
           <br></br>
@@ -72,8 +88,10 @@ export default function BasicTimeline() {
   });
 
   return (
+    <div style={isWide ? divPCStyle : divSPStyle}>
     <Timeline position="alternate">
       {list}
     </Timeline>
+    </div>
   );
 }
