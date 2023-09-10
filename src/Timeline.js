@@ -21,19 +21,21 @@ export default function BasicTimeline() {
   const history = Data.data.history;
   history.forEach((data, index) => {
     const icon = (type) => {
-      if (type === "now") {
+      if (index == 0) {
         return (
           <TimelineDot color="primary">
             <CheckCircleIcon />
           </TimelineDot>)
-      } else if (data.type == "before") {
-        return (<TimelineDot color="grey">
-          <WorkHistoryIcon />
-        </TimelineDot>)
+      } else if (data.type == "work") {
+        return (
+          <TimelineDot color="grey">
+            <WorkHistoryIcon />
+          </TimelineDot>)
       } else {
-        return (<TimelineDot color="grey">
-          <SchoolIcon />
-        </TimelineDot>)
+        return (
+          <TimelineDot color="grey">
+            <SchoolIcon />
+          </TimelineDot>)
       }
     }
     list.push(
