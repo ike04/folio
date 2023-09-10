@@ -11,7 +11,7 @@ root.render(
   <React.StrictMode>
     <Profile />
     <h2 style={{ padding: '5% 0% 0% 35%' }}>Career</h2>
-    <Timeline style={{margin: '5% 50% 50% 55%'}}/>
+    <Timeline />
     <h2 style={{ padding: '5% 0% 0% 35%' }}>Outputs</h2>
     <OfficialOutputs />
   </React.StrictMode>

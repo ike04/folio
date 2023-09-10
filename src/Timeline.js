@@ -1,11 +1,13 @@
 import * as React from 'react';
 import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineOppositeContent, {
+  timelineOppositeContentClasses,
+} from '@mui/lab/TimelineOppositeContent';
 import Typography from '@material-ui/core/Typography'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
@@ -33,7 +35,11 @@ export default function BasicTimeline() {
       }
     }
     list.push(
-      <TimelineItem>
+      <TimelineItem sx={{
+        [`& .${timelineOppositeContentClasses.root}`]: {
+          flex: 0.5,
+        },
+      }}>
         <TimelineOppositeContent
           sx={{ m: 'auto 0' }}
           align="right"
