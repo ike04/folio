@@ -22,15 +22,15 @@ export default function BasicTimeline() {
     borderRadius: '10px',
     margin: '0px 25% 0px 25%',
     backgroundColor: '#f0f0f0'
-}
+  }
 
-const divSPStyle = {
-  border: 'none',
-  borderColor: '#d3d3d3',
-  borderRadius: '10px',
-  margin: '0px 2% 0px 2%',
-  backgroundColor: '#f0f0f0'
-}
+  const divSPStyle = {
+    border: 'none',
+    borderColor: '#d3d3d3',
+    borderRadius: '10px',
+    margin: '0px 2% 0px 2%',
+    backgroundColor: '#f0f0f0'
+  }
   const isWide = useMedia({ minWidth: "480px" });
   var list = [];
   const history = Data.data.history;
@@ -89,9 +89,9 @@ const divSPStyle = {
 
   return (
     <div style={isWide ? divPCStyle : divSPStyle}>
-    <Timeline position="alternate">
-      {list}
-    </Timeline>
+      <Timeline position="alternate">
+        {list}
+      </Timeline>
     </div>
   );
 }

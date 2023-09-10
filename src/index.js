@@ -4,6 +4,7 @@ import './index.css';
 import Timeline from './Timeline';
 import Profile from './Profile'
 import OfficialOutputs from './OfficialOutput';
+import TrainingPrograms from './TrainingPrograms';
 import reportWebVitals from './reportWebVitals';
 import { textAlign } from '@mui/system';
 import Divider from '@mui/material/Divider';
@@ -17,6 +18,10 @@ root.render(
     <Divider variant="middle"/>
     <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Outputs</h2>
     <OfficialOutputs />
+    <Divider variant="middle"/>
+    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Training Programs</h2>
+    <TrainingPrograms />
+    <div style={{padding: '5%'}}></div>
   </React.StrictMode>
 );
 
