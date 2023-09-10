@@ -9,12 +9,14 @@ import TimelineOppositeContent, {
   timelineOppositeContentClasses,
 } from '@mui/lab/TimelineOppositeContent';
 import Typography from '@material-ui/core/Typography'
+import useMedia from "use-media";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import SchoolIcon from '@mui/icons-material/School';
 import Data from './json/timeline.json'
 
 export default function BasicTimeline() {
+  const isWide = useMedia({ minWidth: "480px" });
   var list = [];
   const history = Data.data.history;
   history.forEach((data, index) => {
@@ -22,22 +24,22 @@ export default function BasicTimeline() {
       if (type === "now") {
         return (
           <TimelineDot color="primary">
-        <CheckCircleIcon />
-        </TimelineDot>)
+            <CheckCircleIcon />
+          </TimelineDot>)
       } else if (data.type == "before") {
         return (<TimelineDot color="grey">
-        <WorkHistoryIcon />
+          <WorkHistoryIcon />
         </TimelineDot>)
       } else {
         return (<TimelineDot color="grey">
-        <SchoolIcon />
+          <SchoolIcon />
         </TimelineDot>)
       }
     }
     list.push(
       <TimelineItem sx={{
         [`& .${timelineOppositeContentClasses.root}`]: {
-          flex: 0.5,
+          flex: isWide ? 0.5 : 0.2,
         },
       }}>
         <TimelineOppositeContent
@@ -50,7 +52,7 @@ export default function BasicTimeline() {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
-            {icon(data.type)}
+          {icon(data.type)}
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
