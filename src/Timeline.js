@@ -28,7 +28,7 @@ export default function BasicTimeline() {
     border: 'none',
     borderColor: '#d3d3d3',
     borderRadius: '10px',
-    margin: '0px 2% 0px 2%',
+    margin: '20px 5%',
     backgroundColor: '#f0f0f0'
   }
   const isWide = useMedia({ minWidth: "480px" });

@@ -13,7 +13,7 @@ export default function BasicTimeline() {
         textAlign: 'center',
         border: 'solid',
         borderColor: '#d3d3d3',
-        margin: '20px 35%',
+        margin: '20px 25%',
         boxShadow: '10px 10px 15px -10px',
         borderRadius: '10px'
     }
@@ -22,7 +22,7 @@ export default function BasicTimeline() {
         textAlign: 'center',
         border: 'solid',
         borderColor: '#d3d3d3',
-        margin: '20px 10%',
+        margin: '20px 5%',
         boxShadow: '10px 10px 15px -10px',
         borderRadius: '10px'
     }

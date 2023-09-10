@@ -1,27 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import Header from './Header';
 import Timeline from './Timeline';
 import Profile from './Profile'
+import Divider from './Divider'
 import OfficialOutputs from './OfficialOutput';
 import TrainingPrograms from './TrainingPrograms';
 import reportWebVitals from './reportWebVitals';
 import { textAlign } from '@mui/system';
-import Divider from '@mui/material/Divider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <Profile />
-    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Career</h2>
+    <Header title="Career" />
     <Timeline />
-    <Divider variant="middle"/>
-    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Outputs</h2>
+    <Divider />
+    <Header title="Outputs" />
     <OfficialOutputs />
-    <Divider variant="middle"/>
-    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Training Programs</h2>
+    <Divider />
+    <Header title="Training Programs" />
     <TrainingPrograms />
-    <div style={{padding: '5%'}}></div>
+    <div style={{ padding: '5%' }}></div>
   </React.StrictMode>
 );
 
