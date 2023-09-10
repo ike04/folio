@@ -5,14 +5,15 @@ import Timeline from './Timeline';
 import Profile from './Profile'
 import OfficialOutputs from './OfficialOutput';
 import reportWebVitals from './reportWebVitals';
+import { textAlign } from '@mui/system';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Profile />
-    <h2 style={{ padding: '5% 0% 0% 45%' }}>Career</h2>
+    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Career</h2>
     <Timeline />
-    <h2 style={{ padding: '5% 0% 0% 45%' }}>Outputs</h2>
+    <h2 style={{ padding: '5% 0% 0% 0%', textAlign: 'center' }}>Outputs</h2>
     <OfficialOutputs />
   </React.StrictMode>
 );

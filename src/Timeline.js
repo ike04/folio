@@ -38,6 +38,7 @@ export default function BasicTimeline() {
           </TimelineDot>)
       }
     }
+
     list.push(
       <TimelineItem sx={{
         [`& .${timelineOppositeContentClasses.root}`]: {
@@ -53,7 +54,7 @@ export default function BasicTimeline() {
           {data.startDate}~<br></br>{data.endDate}
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineConnector />
+          <TimelineConnector/>
           {icon(data.type)}
           <TimelineConnector />
         </TimelineSeparator>
@@ -61,7 +62,10 @@ export default function BasicTimeline() {
           <Typography variant="h6" component="span">
             {data.name}
           </Typography>
-          <Typography>{data.content}</Typography>
+          <Typography variant='body1'>
+            {data.content}
+          </Typography>
+          <br></br>
         </TimelineContent>
       </TimelineItem>
     )
