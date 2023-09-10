@@ -1,6 +1,6 @@
 import * as React from 'react';
 import useMedia from "use-media";
-import Data from './officialOutput.json'
+import Data from './json/officialOutput.json'
 
 export default function OfficialOutputs() {
   var list = [];

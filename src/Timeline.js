@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import SchoolIcon from '@mui/icons-material/School';
-import Data from './timeline.json'
+import Data from './json/timeline.json'
 
 export default function BasicTimeline() {
   var list = [];
