@@ -57,8 +57,9 @@ export default function BasicTimeline() {
     list.push(
       <TimelineItem sx={{
         [`& .${timelineOppositeContentClasses.root}`]: {
-          flex: isWide ? 0.5 : 0.2,
+          flex: isWide ? 0.5 : 0.1,
         },
+        ml: -3
       }}>
         <TimelineOppositeContent
           sx={{ m: 'auto 0' }}
