@@ -59,7 +59,7 @@ export default function BasicTimeline() {
         [`& .${timelineOppositeContentClasses.root}`]: {
           flex: isWide ? 0.5 : 0.1,
         },
-        ml: -3
+        mx: -3
       }}>
         <TimelineOppositeContent
           sx={{ m: 'auto 0' }}
