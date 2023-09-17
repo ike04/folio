@@ -13,7 +13,7 @@ import useMedia from "use-media";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import SchoolIcon from '@mui/icons-material/School';
-import Data from './json/timeline.json'
+import Data from '../json/timeline.json'
 
 export default function BasicTimeline() {
   const divPCStyle = {

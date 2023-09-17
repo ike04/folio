@@ -106,7 +106,7 @@ const OgpFetcher = (props) => {
                         }} >
                         <img src={ogp.image} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
                         <h3 style={textStyle}>{ogp.title}</h3>
-                        <p>{date}</p>
+                        <p style={textStyle}>{date}</p>
                     </ div>
             )}
         </>

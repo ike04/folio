@@ -1,10 +1,10 @@
 import * as React from 'react';
 import useMedia from "use-media";
-import Data from './json/officialOutput.json';
+import Data from '../json/officialOutput.json';
 import Grid from '@mui/material/Unstable_Grid2';
 import { style } from '@mui/system';
 import Box from '@mui/material/Box';
-import Ogp from './Ogp'
+import OutputCell from './OutputCell'
 
 export default function OfficialOutputs() {
   var list = [];
@@ -35,7 +35,7 @@ export default function OfficialOutputs() {
 
   Data.data.forEach((output) => {
     list.push(
-      <Ogp url={output.url} />
+      <OutputCell url={output.url} />
     )
   })
   return (

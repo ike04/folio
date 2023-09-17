@@ -1,6 +1,6 @@
 import * as React from 'react';
 import useMedia from "use-media";
-import Data from './json/trainingPrograms.json'
+import Data from '../json/trainingPrograms.json'
 
 export default function TrainingPrograms() {
     var list = [];

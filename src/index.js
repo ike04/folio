@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Header from './Header';
-import Title from './Title';
-import Timeline from './Timeline';
-import Profile from './Profile'
-import Divider from './Divider'
-import OfficialOutputs from './OfficialOutput';
-import TrainingPrograms from './TrainingPrograms';
+import Header from './component/Header';
+import Title from './component/Title';
+import Timeline from './component/Timeline';
+import Profile from './component/Profile'
+import Divider from './component/Divider'
+import OfficialOutputs from './component/OfficialOutput';
+import TrainingPrograms from './component/TrainingPrograms';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
