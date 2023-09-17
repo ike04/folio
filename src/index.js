@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Header from './Header';
+import Title from './Title';
 import Timeline from './Timeline';
 import Profile from './Profile'
 import Divider from './Divider'
@@ -14,14 +15,15 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <Header />
     <Profile />
-    <Header title="Career" />
+    <Title title="Career" />
     <Timeline />
     <Divider />
-    <Header title="Outputs" />
+    <Title title="Outputs" />
     <OfficialOutputs />
     <Divider />
-    <Header title="Training Programs" />
+    <Title title="Training Programs" />
     <TrainingPrograms />
     <div style={{ padding: '5%' }}></div>
   </React.StrictMode>

@@ -51,5 +51,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ike04.github.io/folio/"
+  "homepage": "https://ike04.github.io/folio/",
+  "devDependencies": {
+    "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-scroll": "^1.8.9"
+  }
 }
