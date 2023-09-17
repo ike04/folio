@@ -9,7 +9,6 @@ import Divider from './Divider'
 import OfficialOutputs from './OfficialOutput';
 import TrainingPrograms from './TrainingPrograms';
 import reportWebVitals from './reportWebVitals';
-import { textAlign } from '@mui/system';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

@@ -4,6 +4,7 @@ import Data from './json/officialOutput.json';
 import Grid from '@mui/material/Unstable_Grid2';
 import { style } from '@mui/system';
 import Box from '@mui/material/Box';
+import Ogp from './Ogp'
 
 export default function OfficialOutputs() {
   var list = [];
@@ -33,41 +34,8 @@ export default function OfficialOutputs() {
   }
 
   Data.data.forEach((output) => {
-    function click() {
-      window.location.href = output.url
-    };
-
     list.push(
-      isWide ?
-        <Grid xs={6} >
-          <div style={outputStyle} onClick={click}
-            role="button"
-            tabIndex="0"
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                // Enter or Space で実行
-                click();
-              }
-            }} >
-            <img src={output.imageUrl} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
-            <h3 style={textStyle}>{output.title}</h3>
-            <h4 style={textStyle}> {output.date}</h4>
-          </ div>
-        </Grid>
-        :
-        <div style={outputStyle} onClick={click}
-          role="button"
-          tabIndex="0"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              // Enter or Space で実行
-              click();
-            }
-          }} >
-          <img src={output.imageUrl} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
-          <h3 style={textStyle}>{output.title}</h3>
-          <h4 style={textStyle}> {output.date}</h4>
-        </ div>
+      <Ogp url={output.url} />
     )
   })
   return (
