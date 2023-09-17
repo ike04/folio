@@ -49,13 +49,29 @@ const OgpFetcher = (props) => {
                     title: doc.querySelector('meta[property="og:title"]').getAttribute('content'),
                     image: doc.querySelector('meta[property="og:image"]').getAttribute('content'),
                     description: doc.querySelector('meta[property="og:description"]').getAttribute('content'),
+                    publishedDate: doc.querySelector('meta[property="article:published_time"]')?.getAttribute('content')
                 };
                 setOgp(ogp);
+                setDate(formatPublishedDate(ogp.publishedDate));
             } catch (error) {
                 console.error('Error fetching OGP:', error);
             }
         }
-
+    
+        const formatPublishedDate = (rawDate) => {
+            if (rawDate) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const date = new Date(rawDate * 1000);
+                const day = date.getDate();
+                const month = months[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day} ${month} ${year}`;
+            } else {
+                return '';
+            }
+        }
+        
+    
         fetchOgp();
     }, []);
 
@@ -75,6 +91,7 @@ const OgpFetcher = (props) => {
                             }} >
                             <img src={ogp.image} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
                             <h3 style={textStyle}>{ogp.title}</h3>
+                            <p style={textStyle}>{date}</p>
                         </ div>
                     </Grid>
                     :
@@ -84,11 +101,12 @@ const OgpFetcher = (props) => {
                         onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ") {
                                 // Enter or Space で実行
-                                onclick();
+                                click();
                             }
                         }} >
                         <img src={ogp.image} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
                         <h3 style={textStyle}>{ogp.title}</h3>
+                        <p>{date}</p>
                     </ div>
             )}
         </>
