@@ -25,9 +25,9 @@ export default function TrainingPrograms() {
         };
 
         list.push(
-            <div style={isWide ? divStyle : SPStyle}>
-                <li onClick={click}>{program.title}</li>
-            </div>
+            <li style={isWide ? divStyle : SPStyle}>
+                <a href={program.url}>{program.title}</a>
+            </li>
         )
     })
 
