@@ -6,7 +6,6 @@ import Title from './Title';
 import Timeline from './Timeline';
 import Profile from './Profile'
 import Divider from './Divider'
-import Ogp from './FetchOgp'
 import OfficialOutputs from './OfficialOutput';
 import TrainingPrograms from './TrainingPrograms';
 import reportWebVitals from './reportWebVitals';
@@ -17,7 +16,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
-    <Ogp/>
     <Profile />
     <Title title="Career" />
     <Timeline />
