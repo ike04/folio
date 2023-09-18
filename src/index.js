@@ -1,30 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Header from './component/Header';
-import Title from './component/Title';
-import Timeline from './component/Timeline';
-import Profile from './component/Profile'
-import Divider from './component/Divider'
-import OfficialOutputs from './component/OfficialOutput';
-import TrainingPrograms from './component/TrainingPrograms';
+import App from './App'
+import ReactGA from 'react-ga4';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Google Analytics 測定 ID を入力して設定
+ReactGA.initialize("G-ZTPNRX81R0");
+
 root.render(
   <React.StrictMode>
-    <Header />
-    <Profile />
-    <Title title="Career" />
-    <Timeline />
-    <Divider />
-    <Title title="Outputs" />
-    <OfficialOutputs />
-    <Divider />
-    <Title title="Training Programs" />
-    <TrainingPrograms />
-    <div style={{ padding: '5%' }}></div>
+    <App />
   </React.StrictMode>
 );
 
