@@ -31,9 +31,9 @@ export default function BasicTimeline() {
     const iconDivSPPadding = { display: 'block', padding: '0px 20% 0px 20%' };
 
     const click = (tag) => {
-        window.gtag("event", { tag }, {
+        window.gtag("event", tag, {
             event_category: "click",
-            event_label: "output",
+            event_label: "profile",
         });
     };
 
