@@ -30,6 +30,13 @@ export default function BasicTimeline() {
     const iconDivPCPadding = { display: 'block', padding: '0px 30% 0px 30%' };
     const iconDivSPPadding = { display: 'block', padding: '0px 20% 0px 20%' };
 
+    const click = (tag) => {
+        window.gtag("event", { tag }, {
+            event_category: "click",
+            event_label: "output",
+        });
+    };
+
     return (
         <div style={isWide ? divPCStyle : divSPStyle}>
             <img style={{
@@ -42,9 +49,9 @@ export default function BasicTimeline() {
             <h3>Issei Ikeda</h3>
             <h4>Android Engineer</h4>
             <div style={isWide ? iconDivPCPadding : iconDivSPPadding}>
-                <a href="https://github.com/ike04"><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/github-mark.png`} alt="" /></a>
-                <a href="https://twitter.com/ike_pikmin"><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/twitter.png`} alt="" /></a>
-                <a href="https://qiita.com/ike04"><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/qiita.png`} alt="" /></a>
+                <a href="https://github.com/ike04" onClick={click("github")}><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/github-mark.png`} alt="" /></a>
+                <a href="https://twitter.com/ike_pikmin" onClick={click("twitter")}><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/twitter.png`} alt="" /></a>
+                <a href="https://qiita.com/ike04" onClick={click("qiita")}><img style={snsIconStyle} src={`${process.env.PUBLIC_URL}/qiita.png`} alt="" /></a>
             </div>
 
         </div >
