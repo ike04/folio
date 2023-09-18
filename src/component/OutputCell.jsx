@@ -36,6 +36,10 @@ const OgpFetcher = (props) => {
 
     function click() {
         window.location.href = url
+        window.gtag("event", "techblog", {
+            event_category: "click",
+            event_label: "output",
+          });
     };
 
     useEffect(() => {
