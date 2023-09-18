@@ -1,6 +1,8 @@
 import { style } from '@mui/system';
 import * as React from 'react';
+import { useEffect } from "react";
 import useMedia from "use-media";
+import ReactGA from "react-ga4";
 
 export default function BasicTimeline() {
     const isWide = useMedia({ minWidth: "480px" });
@@ -29,6 +31,16 @@ export default function BasicTimeline() {
 
     const iconDivPCPadding = { display: 'block', padding: '0px 30% 0px 30%' };
     const iconDivSPPadding = { display: 'block', padding: '0px 20% 0px 20%' };
+
+    useEffect(() => {
+        // Google Analytics 測定 ID を入力して設定
+        ReactGA.initialize("G-ZTPNRX81R0");
+        // ページビューイベントを処理
+        ReactGA.send({
+          hitType: "pageview",
+          page: "index.js"
+        });
+        }, []);
 
     return (
         <div style={isWide ? divPCStyle : divSPStyle}>
