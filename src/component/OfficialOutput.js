@@ -8,19 +8,18 @@ import OutputCell from './OutputCell'
 
 export default function OfficialOutputs() {
   var list = [];
-  const isWide = useMedia({ minWidth: "480px" });
+  const isMobile = useMedia({ minWidth: "519px" });
+  const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
+  const isPc = useMedia({ minWidth: "960px" })
+
   const textStyle = {
     textAlign: 'left',
     paddingLeft: '8px',
     paddingRight: '8px'
   }
 
-  const divPCStyle = {
-    margin: '20px 25%',
-  }
-
-  const divSPStyle = {
-    margin: '20px 5%',
+  const divStyle = {
+    margin: isPc ?'20px 25%' : isTablet ? '20px 15%' : '20px 5%',
   }
 
   const outputStyle = {
@@ -39,7 +38,7 @@ export default function OfficialOutputs() {
     )
   })
   return (
-    <Box sx={{ flexGrow: 1 }} style={isWide ? divPCStyle : divSPStyle}>
+    <Box sx={{ flexGrow: 1 }} style={divStyle}>
       <Grid container spacing={0.5}>
         {list}
       </Grid>

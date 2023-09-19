@@ -4,37 +4,31 @@ import useMedia from "use-media";
 import Grid from '@mui/material/Unstable_Grid2';
 import { CircularProgress } from '@mui/material';
 
-const textStyle = {
-    textAlign: 'left',
-    paddingLeft: '8px',
-    paddingRight: '8px'
-}
-
-const divPCStyle = {
-    margin: '20px 25%',
-}
-
-const divSPStyle = {
-    margin: '20px 5%',
-}
-
-const outputStyle = {
-    textAlign: 'center',
-    border: 'solid',
-    borderColor: '#d3d3d3',
-    margin: '20px 10%',
-    boxShadow: '10px 10px 15px -10px',
-    borderRadius: '10px',
-    cursor: 'pointer'
-}
-
-
 const OgpFetcher = (props) => {
-    const isWide = useMedia({ minWidth: "480px" });
     const [progress, setProgress] = React.useState(false);
     const [ogp, setOgp] = useState(null);
     const [date, setDate] = useState(null);
     const url = props.url;
+
+    const isMobile = useMedia({ minWidth: "519px" });
+    const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
+    const isPc = useMedia({ minWidth: "960px" })
+
+    const textStyle = {
+        textAlign: 'left',
+        paddingLeft: '8px',
+        paddingRight: '8px'
+    }
+
+    const outputStyle = {
+        textAlign: 'center',
+        border: 'solid',
+        borderColor: '#d3d3d3',
+        margin: '20px 10%',
+        boxShadow: '10px 10px 15px -10px',
+        borderRadius: '10px',
+        cursor: 'pointer'
+    }
 
     function click() {
         window.open(url, '_blank')
@@ -86,9 +80,9 @@ const OgpFetcher = (props) => {
 
     return (
         <>
-            {progress ? <CircularProgress align="center"/> :
+            {progress ? <CircularProgress align="center" /> :
                 ogp && (
-                    isWide ?
+                    isMobile ?
                         <Grid xs={6} >
                             <div style={outputStyle} onClick={() => click()}
                                 role="button"
@@ -119,7 +113,6 @@ const OgpFetcher = (props) => {
                             <p style={textStyle}>{date}</p>
                         </ div>
                 )}
-
         </>
     );
 }

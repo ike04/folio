@@ -16,22 +16,18 @@ import SchoolIcon from '@mui/icons-material/School';
 import Data from '../json/timeline.json'
 
 export default function BasicTimeline() {
-  const divPCStyle = {
+  const isMobile = useMedia({ minWidth: "519px" });
+  const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
+  const isPc = useMedia({ minWidth: "960px" });
+  
+  const divStyle = {
     border: 'none',
     borderColor: '#d3d3d3',
     borderRadius: '10px',
-    margin: '0px 25% 0px 25%',
+    margin: isPc ? '0px 25% 0px 25%' : isTablet ? '20px 15%' : '20px 5%',
     backgroundColor: '#f0f0f0'
   }
 
-  const divSPStyle = {
-    border: 'none',
-    borderColor: '#d3d3d3',
-    borderRadius: '10px',
-    margin: '20px 5%',
-    backgroundColor: '#f0f0f0'
-  }
-  const isWide = useMedia({ minWidth: "480px" });
   var list = [];
   const history = Data.data.history;
   history.forEach((data, index) => {
@@ -57,7 +53,7 @@ export default function BasicTimeline() {
     list.push(
       <TimelineItem sx={{
         [`& .${timelineOppositeContentClasses.root}`]: {
-          flex: isWide ? 0.5 : 0.1,
+          flex: 0.1,
         },
         mx: -3
       }}>
@@ -89,7 +85,7 @@ export default function BasicTimeline() {
   });
 
   return (
-    <div style={isWide ? divPCStyle : divSPStyle}>
+    <div style={divStyle}>
       <Timeline position="alternate">
         {list}
       </Timeline>
