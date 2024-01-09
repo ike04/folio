@@ -38,7 +38,7 @@ export default function BasicTimeline() {
                 height: '100px',
                 borderRadius: '50%',
                 padding: '10px'
-            }} src={`${process.env.PUBLIC_URL}/profile.png`} alt="Profile" />
+            }} src={`${process.env.PUBLIC_URL}/profile.jpg`} alt="Profile" />
 
             <h3>Issei Ikeda</h3>
             <h4>Android Engineer</h4>
