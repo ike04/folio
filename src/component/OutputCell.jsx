@@ -39,28 +39,34 @@ const OgpFetcher = (props) => {
     };
 
     useEffect(() => {
-        const fetchOgp = async () => {
-            try {
-                setProgress(true)
-                const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-                const html = response.data.contents;
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const ogp = {
-                    title: doc.querySelector('meta[property="og:title"]').getAttribute('content'),
-                    image: doc.querySelector('meta[property="og:image"]').getAttribute('content'),
-                    description: doc.querySelector('meta[property="og:description"]').getAttribute('content'),
-                    publishedDate: doc.querySelector('meta[property="article:published_time"]')?.getAttribute('content')
-                };
-                setOgp(ogp);
-                setDate(formatPublishedDate(ogp.publishedDate));
-                setProgress(false)
-            } catch (error) {
-                setProgress(false)
-                console.error('Error fetching OGP:', error);
-            }
-        }
+        const fetchOgp = () => {
+            setProgress(true);
+            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const html = data.contents;
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const ogp = {
+                        title: doc.querySelector('meta[property="og:title"]').getAttribute('content'),
+                        image: doc.querySelector('meta[property="og:image"]').getAttribute('content'),
+                        description: doc.querySelector('meta[property="og:description"]').getAttribute('content'),
+                        publishedDate: doc.querySelector('meta[property="article:published_time"]')?.getAttribute('content')
+                    };
 
+                    // キャッシュに保存
+                    localStorage.setItem(url, JSON.stringify(ogp));
+
+                    setOgp(ogp);
+                    setDate(formatPublishedDate(ogp.publishedDate));
+                    setProgress(false);
+                })
+                .catch(error => {
+                    setProgress(false);
+                    console.error('Error fetching OGP:', error);
+                });
+        };
+        
         const formatPublishedDate = (rawDate) => {
             if (rawDate) {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
