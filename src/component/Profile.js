@@ -5,13 +5,13 @@ export default function BasicTimeline() {
     const isPc = useMedia({ minWidth: "960px" })
 
     const heroStyle = {
-        minHeight: isPc ? '70vh' : '60vh',
+        minHeight: isPc ? '60vh' : '50vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        padding: isPc ? '80px 20px' : '60px 20px',
+        padding: isPc ? '30px 20px 20px' : '30px 20px 20px',
         animation: 'fadeInUp 1s ease-out',
         position: 'relative',
     }

@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-scroll";
 
 const pages = ['Profile', 'Skills', 'Career', 'Outputs'];
@@ -27,7 +26,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{
         background: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(10px)',
@@ -37,11 +36,6 @@ function ResponsiveAppBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{
-            display: { xs: 'none', md: 'flex' },
-            mr: 1,
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
-          }} />
           <Typography
             variant="h6"
             noWrap
@@ -129,11 +123,6 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{
-            display: { xs: 'flex', md: 'none' },
-            mr: 1,
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
-          }} />
           <Typography
             variant="h5"
             noWrap

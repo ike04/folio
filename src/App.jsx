@@ -8,6 +8,7 @@ import Profile from './component/Profile'
 import OfficialOutputs from './component/OfficialOutput';
 import Skills from './component/Skills';
 import ReactGA from 'react-ga4';
+import Toolbar from '@mui/material/Toolbar';
 
 export default function App() {
     useEffect(() => {
@@ -20,6 +21,7 @@ export default function App() {
 
     return (<>
         <Header />
+        <Toolbar />
         <Profile />
         <Title title="Skills" />
         <Skills />

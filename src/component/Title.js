@@ -6,7 +6,7 @@ const Title = (props) => {
     const isPc = useMedia({ minWidth: "960px" })
 
     const containerStyle = {
-        margin: isPc ? '100px auto 60px' : isTablet ? '80px auto 50px' : '60px auto 40px',
+        margin: isPc ? '20px auto 40px' : isTablet ? '20px auto 30px' : '20px auto 30px',
         textAlign: 'center',
         padding: '0 20px',
         maxWidth: '1200px',
@@ -35,7 +35,7 @@ const Title = (props) => {
         textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
         position: 'relative',
         letterSpacing: '-1px',
-        marginBottom: '60px',
+        marginBottom: '30px',
     }
 
     const underlineStyle = {
