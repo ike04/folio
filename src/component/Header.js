@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-scroll";
 
-const pages = ['Profile', 'Career', 'Outputs', 'Training Programs'];
+const pages = ['Profile', 'Career', 'Outputs'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -35,10 +35,22 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{
+            display: { xs: 'none', md: 'flex' },
+            mr: 1,
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+          }} />
           <Typography
             variant="h6"
             noWrap
@@ -50,8 +62,13 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'white',
               textDecoration: 'none',
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                textShadow: '0 4px 20px rgba(255,255,255,0.5)',
+              }
             }}
           >
              Portfolio
@@ -65,6 +82,11 @@ function ResponsiveAppBar() {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                }
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -84,16 +106,43 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                '& .MuiPaper-root': {
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: '10px',
+                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
+                }
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to={page}>{page}</Link></Typography>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))',
+                    }
+                  }}
+                >
+                  <Typography textAlign="center">
+                    <Link
+                      to={page}
+                      style={{
+                        textDecoration: 'none',
+                        color: '#333',
+                        fontWeight: 500,
+                      }}
+                    >{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon sx={{
+            display: { xs: 'flex', md: 'none' },
+            mr: 1,
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+          }} />
           <Typography
             variant="h5"
             noWrap
@@ -106,8 +155,9 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'white',
               textDecoration: 'none',
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
             }}
           >
             Portfolio
@@ -117,9 +167,28 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  fontWeight: 500,
+                  fontSize: '0.95rem',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    transform: 'translateY(-2px)',
+                    textShadow: '0 4px 8px rgba(255,255,255,0.3)',
+                  }
+                }}
               >
-                <Link to={page}>{page}</Link>
+                <Link
+                  to={page}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                  }}
+                >{page}</Link>
               </Button>
             ))}
           </Box>

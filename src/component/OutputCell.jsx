@@ -1,126 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import useMedia from "use-media";
 import Grid from '@mui/material/Unstable_Grid2';
-import { CircularProgress } from '@mui/material';
 
-const OgpFetcher = (props) => {
-    const [progress, setProgress] = React.useState(false);
-    const [ogp, setOgp] = useState(null);
-    const [date, setDate] = useState(null);
-    const url = props.url;
+const OutputCell = (props) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const { title, image, url, date } = props;
 
     const isMobile = useMedia({ minWidth: "519px" });
-    const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
-    const isPc = useMedia({ minWidth: "960px" })
 
     const textStyle = {
         textAlign: 'left',
-        paddingLeft: '8px',
-        paddingRight: '8px'
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        paddingTop: '15px',
+        color: '#2d3748',
+        fontWeight: '600',
+        fontSize: '16px',
+        lineHeight: '1.4',
+        flex: 1,
+    }
+
+    const dateStyle = {
+        textAlign: 'left',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        paddingBottom: '20px',
+        color: '#718096',
+        fontSize: '13px',
+        marginTop: '10px',
+        fontWeight: '500',
+    }
+
+    const imageStyle = {
+        width: '100%',
+        height: 'auto',
+        maxHeight: '250px',
+        objectFit: 'contain',
+        borderTopLeftRadius: '20px',
+        borderTopRightRadius: '20px',
+        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+        display: 'block',
+    }
+
+    const imageContainerStyle = {
+        overflow: 'hidden',
+        borderTopLeftRadius: '20px',
+        borderTopRightRadius: '20px',
+        backgroundColor: '#f7fafc',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '180px',
+        padding: '20px',
     }
 
     const outputStyle = {
         textAlign: 'center',
-        border: 'solid',
-        borderColor: '#d3d3d3',
-        margin: '20px 10%',
-        boxShadow: '10px 10px 15px -10px',
-        borderRadius: '10px',
-        cursor: 'pointer'
+        border: 'none',
+        background: 'rgba(255, 255, 255, 0.98)',
+        backdropFilter: 'blur(20px)',
+        margin: '0',
+        boxShadow: isHovered
+            ? '0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(102, 126, 234, 0.5)'
+            : '0 20px 50px rgba(0, 0, 0, 0.2)',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        overflow: 'hidden',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        width: isMobile ? '100%' : 'fit-content',
+        minWidth: isMobile ? '100%' : '300px',
+        maxWidth: isMobile ? '100%' : '400px',
     }
 
-    function click() {
-        window.open(url, '_blank')
-        window.gtag("event", "techblog", {
-            event_category: "click",
-            event_label: "output",
-        });
+    const handleClick = () => {
+        window.open(url, '_blank');
+        if (window.gtag) {
+            window.gtag("event", "techblog", {
+                event_category: "click",
+                event_label: "output",
+            });
+        }
     };
 
-    useEffect(() => {
-        const fetchOgp = () => {
-            setProgress(true);
-            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const html = data.contents;
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const ogp = {
-                        title: doc.querySelector('meta[property="og:title"]').getAttribute('content'),
-                        image: doc.querySelector('meta[property="og:image"]').getAttribute('content'),
-                        description: doc.querySelector('meta[property="og:description"]').getAttribute('content'),
-                        publishedDate: doc.querySelector('meta[property="article:published_time"]')?.getAttribute('content')
-                    };
-
-                    // キャッシュに保存
-                    localStorage.setItem(url, JSON.stringify(ogp));
-
-                    setOgp(ogp);
-                    setDate(formatPublishedDate(ogp.publishedDate));
-                    setProgress(false);
-                })
-                .catch(error => {
-                    setProgress(false);
-                    console.error('Error fetching OGP:', error);
-                });
-        };
-        
-        const formatPublishedDate = (rawDate) => {
-            if (rawDate) {
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                const date = new Date(rawDate * 1000);
-                const day = date.getDate();
-                const month = months[date.getMonth()];
-                const year = date.getFullYear();
-                return `${day} ${month} ${year}`;
-            } else {
-                return '';
-            }
-        }
-
-
-        fetchOgp();
-    }, []);
+    const cardContent = (
+        <>
+            <div style={imageContainerStyle}>
+                <img src={`${process.env.PUBLIC_URL}/${image}`} style={imageStyle} alt={title} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <h3 style={textStyle}>{title}</h3>
+                <p style={dateStyle}>{date}</p>
+            </div>
+        </>
+    );
 
     return (
-        <>
-            {progress ? <CircularProgress align="center" /> :
-                ogp && (
-                    isMobile ?
-                        <Grid xs={6} >
-                            <div style={outputStyle} onClick={() => click()}
-                                role="button"
-                                tabIndex="0"
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                        // Enter or Space で実行
-                                        click();
-                                    }
-                                }} >
-                                <img src={ogp.image} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
-                                <h3 style={textStyle}>{ogp.title}</h3>
-                                <p style={textStyle}>{date}</p>
-                            </ div>
-                        </Grid>
-                        :
-                        <div style={outputStyle} onClick={() => click()}
-                            role="button"
-                            tabIndex="0"
-                            onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    // Enter or Space で実行
-                                    click();
-                                }
-                            }} >
-                            <img src={ogp.image} style={{ width: '100%', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
-                            <h3 style={textStyle}>{ogp.title}</h3>
-                            <p style={textStyle}>{date}</p>
-                        </ div>
-                )}
-        </>
+        <Grid xs={12} sm={6} md={4}>
+            <div
+                style={outputStyle}
+                onClick={handleClick}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                role="button"
+                tabIndex="0"
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        handleClick();
+                    }
+                }}
+            >
+                {cardContent}
+            </div>
+        </Grid>
     );
 }
 
-export default OgpFetcher;
+export default OutputCell;

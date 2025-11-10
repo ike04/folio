@@ -22,10 +22,15 @@ export default function BasicTimeline() {
   
   const divStyle = {
     border: 'none',
-    borderColor: '#d3d3d3',
-    borderRadius: '10px',
-    margin: isPc ? '0px 25% 0px 25%' : isTablet ? '20px 15%' : '20px 5%',
-    backgroundColor: '#f0f0f0'
+    borderRadius: '24px',
+    margin: '0 auto',
+    maxWidth: isPc ? '900px' : '100%',
+    padding: isPc ? '50px' : isTablet ? '40px' : '20px',
+    background: 'rgba(255, 255, 255, 0.98)',
+    backdropFilter: 'blur(20px)',
+    boxShadow: '0 30px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+    animation: 'fadeInUp 0.8s ease-out',
+    marginBottom: '40px',
   }
 
   var list = [];
@@ -39,12 +44,22 @@ export default function BasicTimeline() {
           </TimelineDot>)
       } else if (data.type == "work") {
         return (
-          <TimelineDot color="grey">
+          <TimelineDot
+            sx={{
+              background: 'linear-gradient(135deg, #f093fb, #f5576c)',
+              boxShadow: '0 4px 15px rgba(245, 87, 108, 0.3)',
+            }}
+          >
             <WorkHistoryIcon />
           </TimelineDot>)
       } else {
         return (
-          <TimelineDot color="grey">
+          <TimelineDot
+            sx={{
+              background: 'linear-gradient(135deg, #4facfe, #00f2fe)',
+              boxShadow: '0 4px 15px rgba(79, 172, 254, 0.3)',
+            }}
+          >
             <SchoolIcon />
           </TimelineDot>)
       }

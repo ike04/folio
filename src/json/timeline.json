@@ -3,8 +3,15 @@
         "history": [
             {
                 "name": "株式会社ZOZO",
-                "startDate": "2022/03",
+                "startDate": "2024/05",
                 "endDate": "",
+                "content": "Flutterを用いたZOZOマッチの新規開発や保守改修に携わる",
+                "type": "work"
+            },
+            {
+                "name": "株式会社ZOZO",
+                "startDate": "2022/03",
+                "endDate": "2024/04",
                 "content": "ZOZOTOWN Androidアプリの開発や仕様調整を担当",
                 "type": "work"
             },

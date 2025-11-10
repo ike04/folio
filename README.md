@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+エンジニアポートフォリオサイト - モダンなUIデザインを採用したReactアプリケーション
 
-## Available Scripts
+## 特徴
 
-In the project directory, you can run:
+- グラデーション背景とグラスモーフィズムデザイン
+- レスポンシブ対応（PC・タブレット・スマートフォン）
+- アニメーション効果とホバーエフェクト
+- Material-UI / MUI コンポーネント使用
 
-### `yarn start`
+## ローカル開発環境のセットアップ
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 必要な環境
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (推奨: v14以上)
+- npm または yarn
 
-### `yarn test`
+### インストール手順
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. リポジトリをクローン
 
-### `yarn build`
+```bash
+git clone <repository-url>
+cd folio
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. 依存関係をインストール
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**重要:** このプロジェクトはMaterial-UI v4とv5が混在しているため、`--legacy-peer-deps`オプションが必要です。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install --legacy-peer-deps
+```
 
-### `yarn eject`
+または
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+yarn install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. 開発サーバーを起動
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+または
 
-## Learn More
+```bash
+yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ブラウザで [http://localhost:3000](http://localhost:3000) を開くと、アプリケーションが表示されます。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ファイルを編集すると、自動的にページがリロードされます。
 
-### Code Splitting
+## 本番ビルド
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+本番用にアプリケーションをビルドするには：
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+または
 
-### Making a Progressive Web App
+```bash
+yarn build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`build`フォルダに最適化されたプロダクションビルドが生成されます。
 
-### Advanced Configuration
+## デプロイ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+GitHub Pagesへのデプロイ：
 
-### Deployment
+```bash
+npm run deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+または
 
-### `yarn build` fails to minify
+```bash
+yarn deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## プロジェクト構成
+
+```
+folio/
+├── public/          # 静的ファイル（画像など）
+├── src/
+│   ├── component/   # Reactコンポーネント
+│   │   ├── Header.js
+│   │   ├── Profile.js
+│   │   ├── Timeline.js
+│   │   ├── Title.js
+│   │   ├── OfficialOutput.js
+│   │   ├── OutputCell.jsx
+│   │   ├── TrainingPrograms.js
+│   │   └── Divider.js
+│   ├── json/        # データファイル
+│   ├── App.jsx      # メインアプリケーション
+│   ├── index.css    # グローバルスタイル
+│   └── index.js     # エントリーポイント
+└── package.json
+```
+
+## 技術スタック
+
+- **React** 18.2.0
+- **Material-UI** v4 & v5 (MUI)
+- **React Router** 6.15.0
+- **Emotion** (CSS-in-JS)
+- **React GA4** (Google Analytics)
+
+## トラブルシューティング
+
+### 依存関係のインストールエラー
+
+`npm install`でエラーが出る場合：
+
+```bash
+npm install --legacy-peer-deps
+```
+
+### ESLint警告について
+
+開発サーバー起動時にESLintの警告が表示されますが、これらは未使用変数に関するもので、アプリケーションの動作には影響ありません。
+
+### ブラウザが自動的に開かない場合
+
+手動で [http://localhost:3000](http://localhost:3000) にアクセスしてください。
+
+## デザインの特徴
+
+### カラーパレット
+- メインカラー: グラデーション（#667eea → #764ba2）
+- 背景: 固定グラデーション背景
+- カード: 半透明の白（グラスモーフィズム）
+
+### アニメーション
+- `fadeInUp`: コンポーネント表示時のフェードイン
+- `float`: プロフィール画像の浮遊アニメーション
+- `glow`: グロー効果
+- ホバーエフェクト: カード・ボタン・画像のインタラクション
+
+### レスポンシブブレークポイント
+- PC: 960px以上
+- タブレット: 520px〜959px
+- スマートフォン: 519px以下
+
+## ライセンス
+
+このプロジェクトは個人用ポートフォリオサイトです。
+
+## 参考リンク
+
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React documentation](https://reactjs.org/)
+- [Material-UI documentation](https://mui.com/)

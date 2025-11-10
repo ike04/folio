@@ -5,9 +5,7 @@ import Header from './component/Header';
 import Title from './component/Title';
 import Timeline from './component/Timeline';
 import Profile from './component/Profile'
-import Divider from './component/Divider'
 import OfficialOutputs from './component/OfficialOutput';
-import TrainingPrograms from './component/TrainingPrograms';
 import ReactGA from 'react-ga4';
 
 export default function App() {
@@ -24,13 +22,9 @@ export default function App() {
         <Profile />
         <Title title="Career" />
         <Timeline />
-        <Divider />
         <Title title="Outputs" />
         <OfficialOutputs />
-        <Divider />
-        <Title title="Training Programs" />
-        <TrainingPrograms />
-        <div style={{ padding: '5%' }}></div>
+        <div style={{ padding: '80px 0' }}></div>
     </>
     )
 }

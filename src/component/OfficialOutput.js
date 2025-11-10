@@ -19,7 +19,9 @@ export default function OfficialOutputs() {
   }
 
   const divStyle = {
-    margin: isPc ?'20px 25%' : isTablet ? '20px 15%' : '20px 5%',
+    margin: '0 auto',
+    maxWidth: isPc ? '1200px' : '100%',
+    padding: isPc ? '0 40px' : isTablet ? '0 30px' : '0 20px',
   }
 
   const outputStyle = {
@@ -32,14 +34,20 @@ export default function OfficialOutputs() {
     cursor: 'pointer'
   }
 
-  Data.data.forEach((output) => {
+  Data.data.forEach((output, index) => {
     list.push(
-      <OutputCell url={output.url} />
+      <OutputCell
+        key={index}
+        title={output.title}
+        image={output.image}
+        url={output.url}
+        date={output.date}
+      />
     )
   })
   return (
     <Box sx={{ flexGrow: 1 }} style={divStyle}>
-      <Grid container spacing={0.5}>
+      <Grid container spacing={isPc ? 3 : 2}>
         {list}
       </Grid>
     </Box>
