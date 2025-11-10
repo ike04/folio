@@ -19,7 +19,32 @@ export default function BasicTimeline() {
   const isMobile = useMedia({ minWidth: "519px" });
   const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
   const isPc = useMedia({ minWidth: "960px" });
-  
+  const [isVisible, setIsVisible] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const divStyle = {
     border: 'none',
     borderRadius: '24px',
@@ -27,10 +52,12 @@ export default function BasicTimeline() {
     maxWidth: isPc ? '900px' : '100%',
     padding: isPc ? '50px' : isTablet ? '40px' : '20px',
     background: 'rgba(255, 255, 255, 0.98)',
-    backdropFilter: 'blur(20px)',
-    boxShadow: '0 30px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-    animation: 'fadeInUp 0.8s ease-out',
+    backdropFilter: 'blur(30px)',
+    boxShadow: '0 30px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
     marginBottom: '40px',
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
   }
 
   var list = [];
@@ -100,7 +127,7 @@ export default function BasicTimeline() {
   });
 
   return (
-    <div style={divStyle}>
+    <div ref={sectionRef} style={divStyle}>
       <Timeline position="alternate">
         {list}
       </Timeline>

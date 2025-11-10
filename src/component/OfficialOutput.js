@@ -10,7 +10,32 @@ export default function OfficialOutputs() {
   var list = [];
   const isMobile = useMedia({ minWidth: "519px" });
   const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
-  const isPc = useMedia({ minWidth: "960px" })
+  const isPc = useMedia({ minWidth: "960px" });
+  const [isVisible, setIsVisible] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [])
 
   const textStyle = {
     textAlign: 'left',
@@ -22,6 +47,9 @@ export default function OfficialOutputs() {
     margin: '0 auto',
     maxWidth: isPc ? '1200px' : '100%',
     padding: isPc ? '0 40px' : isTablet ? '0 30px' : '0 20px',
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
   }
 
   const outputStyle = {
@@ -46,7 +74,7 @@ export default function OfficialOutputs() {
     )
   })
   return (
-    <Box sx={{ flexGrow: 1 }} style={divStyle}>
+    <Box ref={sectionRef} sx={{ flexGrow: 1 }} style={divStyle}>
       <Grid container spacing={isPc ? 3 : 2}>
         {list}
       </Grid>

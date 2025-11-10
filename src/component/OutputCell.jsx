@@ -57,18 +57,20 @@ const OutputCell = (props) => {
 
     const outputStyle = {
         textAlign: 'center',
-        border: 'none',
-        background: 'rgba(255, 255, 255, 0.98)',
-        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.5)',
+        background: isHovered
+            ? 'rgba(255, 255, 255, 1)'
+            : 'rgba(255, 255, 255, 0.98)',
+        backdropFilter: 'blur(30px)',
         margin: '0',
         boxShadow: isHovered
-            ? '0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(102, 126, 234, 0.5)'
-            : '0 20px 50px rgba(0, 0, 0, 0.2)',
-        borderRadius: '20px',
+            ? '0 40px 100px rgba(102, 126, 234, 0.4), 0 0 0 2px rgba(102, 126, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            : '0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+        borderRadius: '24px',
         cursor: 'pointer',
         overflow: 'hidden',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
+        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        transform: isHovered ? 'translateY(-12px) scale(1.03)' : 'translateY(0) scale(1)',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',

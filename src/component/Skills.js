@@ -4,13 +4,41 @@ import Data from '../json/skills.json';
 
 const Skills = () => {
     const [hoveredIndex, setHoveredIndex] = React.useState(null);
+    const [isVisible, setIsVisible] = React.useState(false);
+    const sectionRef = React.useRef(null);
     const isPc = useMedia({ minWidth: "960px" });
     const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
+
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
 
     const containerStyle = {
         margin: '0 auto',
         maxWidth: isPc ? '1000px' : '100%',
         padding: isPc ? '0 40px' : isTablet ? '0 30px' : '0 20px',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
     };
 
     const gridStyle = {
@@ -21,22 +49,26 @@ const Skills = () => {
     };
 
     const skillCardStyle = (isHovered) => ({
-        background: 'rgba(255, 255, 255, 0.98)',
-        backdropFilter: 'blur(20px)',
-        borderRadius: '20px',
-        padding: isPc ? '30px' : '20px',
+        background: isHovered
+            ? 'rgba(255, 255, 255, 1)'
+            : 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(30px)',
+        borderRadius: '24px',
+        padding: isPc ? '35px' : '25px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '15px',
+        gap: '18px',
         cursor: 'pointer',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        transform: isHovered ? 'translateY(-10px) scale(1.05)' : 'translateY(0) scale(1)',
+        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        transform: isHovered ? 'translateY(-12px) scale(1.06)' : 'translateY(0) scale(1)',
         boxShadow: isHovered
-            ? '0 30px 80px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(102, 126, 234, 0.5)'
-            : '0 15px 40px rgba(0, 0, 0, 0.2)',
-        border: isHovered ? '2px solid rgba(102, 126, 234, 0.3)' : '2px solid transparent',
+            ? '0 40px 100px rgba(102, 126, 234, 0.4), 0 0 0 2px rgba(102, 126, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            : '0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+        border: '1px solid rgba(255, 255, 255, 0.5)',
+        position: 'relative',
+        overflow: 'hidden',
     });
 
     const iconStyle = (isHovered) => ({
@@ -68,7 +100,7 @@ const Skills = () => {
     };
 
     return (
-        <div style={containerStyle}>
+        <div ref={sectionRef} style={containerStyle}>
             <div style={gridStyle}>
                 {Data.skills.map((skill, index) => {
                     const isHovered = hoveredIndex === index;
