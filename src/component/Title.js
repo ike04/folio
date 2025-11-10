@@ -2,7 +2,6 @@ import React from 'react';
 import useMedia from "use-media";
 
 const Title = (props) => {
-    const isMobile = useMedia({ minWidth: "519px" });
     const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
     const isPc = useMedia({ minWidth: "960px" })
 

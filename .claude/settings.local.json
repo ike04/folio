@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(npx serve -s build -p 3001)"
     ],
     "deny": [],
     "ask": []

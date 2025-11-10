@@ -1,9 +1,7 @@
-import { style } from '@mui/system';
 import * as React from 'react';
 import useMedia from "use-media";
 
 export default function BasicTimeline() {
-    const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
     const isPc = useMedia({ minWidth: "960px" })
 
     const heroStyle = {

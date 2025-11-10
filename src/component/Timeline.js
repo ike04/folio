@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
+import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
@@ -16,13 +16,13 @@ import SchoolIcon from '@mui/icons-material/School';
 import Data from '../json/timeline.json'
 
 export default function BasicTimeline() {
-  const isMobile = useMedia({ minWidth: "519px" });
   const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
   const isPc = useMedia({ minWidth: "960px" });
   const [isVisible, setIsVisible] = React.useState(false);
   const sectionRef = React.useRef(null);
 
   React.useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -34,13 +34,13 @@ export default function BasicTimeline() {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -64,12 +64,12 @@ export default function BasicTimeline() {
   const history = Data.data.history;
   history.forEach((data, index) => {
     const icon = (type) => {
-      if (index == 0) {
+      if (index === 0) {
         return (
           <TimelineDot color="primary">
             <CheckCircleIcon />
           </TimelineDot>)
-      } else if (data.type == "work") {
+      } else if (data.type === "work") {
         return (
           <TimelineDot
             sx={{
