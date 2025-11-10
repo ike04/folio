@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-scroll";
 
-const pages = ['Profile', 'Career', 'Outputs'];
+const pages = ['Profile', 'Skills', 'Career', 'Outputs'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {

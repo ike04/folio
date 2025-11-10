@@ -1,0 +1,39 @@
+{
+    "skills": [
+        {
+            "name": "Flutter",
+            "icon": "flutter_icon.png",
+            "category": "Mobile"
+        },
+        {
+            "name": "Android",
+            "icon": "android_icon.png",
+            "category": "Mobile"
+        },
+        {
+            "name": "Kotlin",
+            "icon": "kotlin_icon.png",
+            "category": "Mobile"
+        },
+        {
+            "name": "Java",
+            "icon": "java_icon.png",
+            "category": "Mobile"
+        },
+        {
+            "name": "iOS",
+            "icon": "ios_icon.png",
+            "category": "Mobile"
+        },
+        {
+            "name": "Git",
+            "icon": "git_icon.png",
+            "category": "Tools"
+        },
+        {
+            "name": "Jira",
+            "icon": "jira_icon.png",
+            "category": "Tools"
+        }
+    ]
+}

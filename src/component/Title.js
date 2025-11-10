@@ -54,6 +54,7 @@ const Title = (props) => {
                 {props.title}
             </div>
             <h2 style={style}>
+                {props.title === 'Skills' && 'Tech Stack'}
                 {props.title === 'Career' && 'Timeline'}
                 {props.title === 'Outputs' && 'Featured Work'}
                 <div style={underlineStyle}></div>

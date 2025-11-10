@@ -6,6 +6,7 @@ import Title from './component/Title';
 import Timeline from './component/Timeline';
 import Profile from './component/Profile'
 import OfficialOutputs from './component/OfficialOutput';
+import Skills from './component/Skills';
 import ReactGA from 'react-ga4';
 
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
     return (<>
         <Header />
         <Profile />
+        <Title title="Skills" />
+        <Skills />
         <Title title="Career" />
         <Timeline />
         <Title title="Outputs" />
