@@ -7,6 +7,7 @@ import Timeline from './component/Timeline';
 import Profile from './component/Profile'
 import OfficialOutputs from './component/OfficialOutput';
 import Skills from './component/Skills';
+import Footer from './component/Footer';
 import ReactGA from 'react-ga4';
 import Toolbar from '@mui/material/Toolbar';
 
@@ -29,7 +30,7 @@ export default function App() {
         <Timeline />
         <Title title="Outputs" />
         <OfficialOutputs />
-        <div style={{ padding: '80px 0' }}></div>
+        <Footer />
     </>
     )
 }
