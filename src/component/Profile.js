@@ -1,19 +1,17 @@
-import { style } from '@mui/system';
 import * as React from 'react';
 import useMedia from "use-media";
 
 export default function BasicTimeline() {
-    const isTablet = useMedia({ minWidth: "520px" }) && ({ maxWidth: "959px" });
     const isPc = useMedia({ minWidth: "960px" })
 
     const heroStyle = {
-        minHeight: isPc ? '70vh' : '60vh',
+        minHeight: isPc ? '60vh' : '50vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        padding: isPc ? '80px 20px' : '60px 20px',
+        padding: isPc ? '30px 20px 20px' : '30px 20px 20px',
         animation: 'fadeInUp 1s ease-out',
         position: 'relative',
     }

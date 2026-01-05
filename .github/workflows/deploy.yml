@@ -1,14 +1,16 @@
 name: Deploy to GitHub Pages
 
-on: 
+on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout

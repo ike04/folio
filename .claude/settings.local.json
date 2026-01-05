@@ -11,8 +11,9 @@
       "WebFetch(domain:api.microlink.io)",
       "Bash(ls:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nBento.me風UIにリファクタリング\n\n- BentoCard, ProfileSidebar等のコンポーネントを追加\n- OGP取得機能をmicrolinkio APIで実装\n- Twitter, GitHub, Wantedly等のカードを追加\n- Photography, Writings, Slidesセクションを追加\n- レスポンシブ対応（PC/タブレット/モバイル）\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx serve -s build -p 3001)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []
