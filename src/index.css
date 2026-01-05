@@ -60,3 +60,46 @@ code {
     transform: scale(1);
   }
 }
+
+/* Scroll Fade-in Animation */
+.scroll-fade-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-fade-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation for children within sections */
+.scroll-fade-section.is-visible > * {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.scroll-fade-section.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+.scroll-fade-section.is-visible > *:nth-child(2) { animation-delay: 80ms; }
+.scroll-fade-section.is-visible > *:nth-child(3) { animation-delay: 160ms; }
+.scroll-fade-section.is-visible > *:nth-child(4) { animation-delay: 240ms; }
+.scroll-fade-section.is-visible > *:nth-child(5) { animation-delay: 320ms; }
+.scroll-fade-section.is-visible > *:nth-child(6) { animation-delay: 400ms; }
+.scroll-fade-section.is-visible > *:nth-child(7) { animation-delay: 480ms; }
+.scroll-fade-section.is-visible > *:nth-child(8) { animation-delay: 560ms; }
+.scroll-fade-section.is-visible > *:nth-child(9) { animation-delay: 640ms; }
+.scroll-fade-section.is-visible > *:nth-child(10) { animation-delay: 720ms; }
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-fade-section.is-visible > * {
+    animation: none;
+  }
+}
