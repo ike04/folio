@@ -4,6 +4,8 @@ import ReactGA from 'react-ga4';
 import useMedia from "use-media";
 import WritingsData from './json/officialOutput.json';
 import ProjectsData from './json/projects.json';
+import ThemeToggle from './component/ThemeToggle';
+import { useTheme } from './context/ThemeContext';
 
 // Custom hook for Intersection Observer with performance optimizations
 const useIntersectionObserver = (options = {}) => {
@@ -65,18 +67,18 @@ const BentoCard = ({ children, colSpan = 1, rowSpan = 1, href, onClick, style = 
     const cardStyle = {
         gridColumn: `span ${colSpan}`,
         gridRow: `span ${rowSpan}`,
-        background: '#ffffff',
+        background: 'var(--color-bg-secondary)',
         borderRadius: '20px',
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         cursor: href || onClick ? 'pointer' : 'default',
         overflow: 'hidden',
         transform: isHovered && hoverScale ? 'scale(1.02)' : 'scale(1)',
         boxShadow: isHovered
-            ? '0 20px 40px rgba(0, 0, 0, 0.08)'
-            : '0 1px 3px rgba(0, 0, 0, 0.04)',
+            ? '0 20px 40px var(--color-shadow-hover)'
+            : '0 1px 3px var(--color-shadow)',
         ...style,
     };
 
@@ -118,30 +120,33 @@ const ProfileSidebar = ({ isPc }) => {
         borderRadius: '50%',
         objectFit: 'cover',
         marginBottom: '28px',
-        background: '#e8e8e8',
+        background: 'var(--color-bg-tertiary)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#999',
+        color: 'var(--color-text-tertiary)',
         fontSize: '12px',
+        transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     };
 
     const nameStyle = {
         fontSize: '24px',
         fontWeight: '700',
-        color: '#1a1a1a',
+        color: 'var(--color-text-primary)',
         marginBottom: '20px',
         letterSpacing: '-0.5px',
+        transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     };
 
     const jobStyle = {
         fontSize: '14px',
-        color: '#666',
+        color: 'var(--color-text-secondary)',
         marginBottom: '10px',
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
         lineHeight: '1.4',
+        transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     };
 
     return (
@@ -248,7 +253,7 @@ const WantedlyCard = () => {
             <div style={{
                 width: '40px',
                 height: '40px',
-                background: '#21bddb',
+                background: 'var(--color-wantedly)',
                 borderRadius: '10px',
                 display: 'flex',
                 alignItems: 'center',
@@ -260,8 +265,8 @@ const WantedlyCard = () => {
                 W
             </div>
             <div style={{ marginTop: 'auto' }}>
-                <p style={{ fontWeight: '600', fontSize: '14px', color: '#1a1a1a' }}>Wantedly</p>
-                <p style={{ fontSize: '12px', color: '#999', marginTop: '2px' }}>wantedly.com</p>
+                <p style={{ fontWeight: '600', fontSize: '14px', color: 'var(--color-text-primary)', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>Wantedly</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-tertiary)', marginTop: '2px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>wantedly.com</p>
             </div>
         </BentoCard>
     );
@@ -277,7 +282,7 @@ const PhotoCard = ({ label, placeholderText = "Photo", image, colSpan = 1, rowSp
                 padding: '0',
                 minHeight: minHeight,
                 position: 'relative',
-                background: '#e8e8e8',
+                background: 'var(--color-bg-tertiary)',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
@@ -298,19 +303,20 @@ const PhotoCard = ({ label, placeholderText = "Photo", image, colSpan = 1, rowSp
                     }}
                 />
             ) : (
-                <span style={{ color: '#999', fontSize: '12px' }}>{placeholderText}</span>
+                <span style={{ color: 'var(--color-text-tertiary)', fontSize: '12px' }}>{placeholderText}</span>
             )}
             {label && (
                 <div style={{
                     position: 'absolute',
                     bottom: '10px',
                     right: '10px',
-                    background: 'rgba(255,255,255,0.95)',
+                    background: 'var(--color-label-bg)',
                     padding: '4px 10px',
                     borderRadius: '6px',
                     fontSize: '12px',
                     fontWeight: '500',
-                    color: '#1a1a1a',
+                    color: 'var(--color-text-primary)',
+                    transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}>
                     {label}
                 </div>
@@ -323,6 +329,7 @@ const PhotoCard = ({ label, placeholderText = "Photo", image, colSpan = 1, rowSp
 const GitHubCard = ({ username = 'ike04' }) => {
     const [contributions, setContributions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { isDark } = useTheme();
 
     useEffect(() => {
         const fetchContributions = async () => {
@@ -359,7 +366,10 @@ const GitHubCard = ({ username = 'ike04' }) => {
         fetchContributions();
     }, [username]);
 
-    const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+    // GitHub contribution colors for light/dark mode
+    const colors = isDark
+        ? ['#2a2a30', '#0e4429', '#006d32', '#26a641', '#39d353']
+        : ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
 
     return (
         <BentoCard
@@ -368,20 +378,21 @@ const GitHubCard = ({ username = 'ike04' }) => {
             style={{ padding: '20px' }}
         >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                <svg width="32" height="32" viewBox="0 0 98 96" fill="#24292f">
+                <svg width="32" height="32" viewBox="0 0 98 96" fill="var(--color-github)" style={{ transition: 'fill 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                     <path fillRule="evenodd" clipRule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
                 </svg>
                 <span style={{
-                    background: '#f5f5f7',
-                    color: '#1a1a1a',
+                    background: 'var(--color-badge-bg)',
+                    color: 'var(--color-text-primary)',
                     padding: '5px 14px',
                     borderRadius: '14px',
                     fontSize: '12px',
                     fontWeight: '500',
-                    border: '1px solid #e0e0e0',
+                    border: '1px solid var(--color-badge-border)',
+                    transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}>Follow</span>
             </div>
-            <p style={{ fontWeight: '500', fontSize: '14px', color: '#1a1a1a', marginBottom: '12px' }}>@{username}</p>
+            <p style={{ fontWeight: '500', fontSize: '14px', color: 'var(--color-text-primary)', marginBottom: '12px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>@{username}</p>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(14, 1fr)',
@@ -396,8 +407,9 @@ const GitHubCard = ({ username = 'ike04' }) => {
                             style={{
                                 width: '100%',
                                 paddingBottom: '100%',
-                                background: '#ebedf0',
+                                background: colors[0],
                                 borderRadius: '2px',
+                                transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                             }}
                         />
                     ))
@@ -410,6 +422,7 @@ const GitHubCard = ({ username = 'ike04' }) => {
                                 paddingBottom: '100%',
                                 background: colors[day.level] || colors[0],
                                 borderRadius: '2px',
+                                transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                             }}
                             title={`${day.date}: ${day.count} contributions`}
                         />
@@ -429,7 +442,7 @@ const SNSIconCard = () => {
                 padding: '0',
                 minHeight: '140px',
                 position: 'relative',
-                background: '#e8e8e8',
+                background: 'var(--color-bg-tertiary)',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
@@ -452,12 +465,13 @@ const SNSIconCard = () => {
                 position: 'absolute',
                 bottom: '10px',
                 right: '10px',
-                background: 'rgba(255,255,255,0.95)',
+                background: 'var(--color-label-bg)',
                 padding: '4px 10px',
                 borderRadius: '6px',
                 fontSize: '12px',
                 fontWeight: '500',
-                color: '#1a1a1a',
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             }}>
                 SNS Icon
             </div>
@@ -476,7 +490,7 @@ const ZennCard = () => {
             <div style={{
                 width: '40px',
                 height: '40px',
-                background: '#3ea8ff',
+                background: 'var(--color-zenn)',
                 borderRadius: '10px',
                 display: 'flex',
                 alignItems: 'center',
@@ -488,8 +502,8 @@ const ZennCard = () => {
                 Z
             </div>
             <div style={{ marginTop: 'auto' }}>
-                <p style={{ fontWeight: '600', fontSize: '14px', color: '#1a1a1a' }}>@ike04</p>
-                <p style={{ fontSize: '12px', color: '#999', marginTop: '2px' }}>zenn.dev</p>
+                <p style={{ fontWeight: '600', fontSize: '14px', color: 'var(--color-text-primary)', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>@ike04</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-tertiary)', marginTop: '2px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>zenn.dev</p>
             </div>
         </BentoCard>
     );
@@ -506,7 +520,7 @@ const QiitaCard = () => {
             <div style={{
                 width: '40px',
                 height: '40px',
-                background: '#55c500',
+                background: 'var(--color-qiita)',
                 borderRadius: '10px',
                 display: 'flex',
                 alignItems: 'center',
@@ -517,8 +531,8 @@ const QiitaCard = () => {
                 Qiita
             </div>
             <div style={{ marginTop: 'auto' }}>
-                <p style={{ fontWeight: '600', fontSize: '14px', color: '#1a1a1a' }}>@ike04</p>
-                <p style={{ fontSize: '12px', color: '#999', marginTop: '2px' }}>qiita.com</p>
+                <p style={{ fontWeight: '600', fontSize: '14px', color: 'var(--color-text-primary)', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>@ike04</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-tertiary)', marginTop: '2px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>qiita.com</p>
             </div>
         </BentoCard>
     );
@@ -571,15 +585,16 @@ const ProjectCard = ({ url, colSpan = 2 }) => {
                 <div style={{
                     width: '36px',
                     height: '36px',
-                    background: '#e8e8e8',
+                    background: 'var(--color-bg-tertiary)',
                     borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#999',
+                    color: 'var(--color-text-tertiary)',
                     fontSize: '8px',
                     marginBottom: '10px',
                     overflow: 'hidden',
+                    transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}>
                     {ogData.logo ? (
                         <img src={ogData.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -587,10 +602,10 @@ const ProjectCard = ({ url, colSpan = 2 }) => {
                         'App'
                     )}
                 </div>
-                <p style={{ fontWeight: '600', fontSize: '13px', color: '#1a1a1a', lineHeight: '1.4' }}>
+                <p style={{ fontWeight: '600', fontSize: '13px', color: 'var(--color-text-primary)', lineHeight: '1.4', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                     {ogData.title || 'Loading...'}
                 </p>
-                <p style={{ fontSize: '11px', color: '#999', marginTop: '2px' }}>{hostname}</p>
+                <p style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', marginTop: '2px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>{hostname}</p>
             </div>
         </BentoCard>
     );
@@ -663,21 +678,23 @@ const BlogCard = ({ title, url, source, colSpan = 2 }) => {
                 <p style={{
                     fontWeight: '600',
                     fontSize: '13px',
-                    color: '#1a1a1a',
+                    color: 'var(--color-text-primary)',
                     lineHeight: '1.4',
+                    transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}>{title}</p>
-                <p style={{ fontSize: '11px', color: '#999', marginTop: '4px' }}>{source}</p>
+                <p style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', marginTop: '4px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>{source}</p>
             </div>
             <div style={{
                 flex: 1,
                 minHeight: '160px',
-                background: '#e8e8e8',
+                background: 'var(--color-bg-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#999',
+                color: 'var(--color-text-tertiary)',
                 fontSize: '12px',
                 overflow: 'hidden',
+                transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             }}>
                 {loading ? (
                     <span>Loading...</span>
@@ -692,7 +709,7 @@ const BlogCard = ({ title, url, source, colSpan = 2 }) => {
                         }}
                         onError={(e) => {
                             e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = '<span style="color: #999; font-size: 12px;">Thumbnail</span>';
+                            e.target.parentElement.innerHTML = '<span style="color: var(--color-text-tertiary); font-size: 12px;">Thumbnail</span>';
                         }}
                     />
                 ) : (
@@ -753,21 +770,23 @@ const SlideCard = ({ title, url, source, colSpan = 2 }) => {
                 <p style={{
                     fontWeight: '600',
                     fontSize: '13px',
-                    color: '#1a1a1a',
+                    color: 'var(--color-text-primary)',
                     lineHeight: '1.4',
+                    transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}>{displayTitle}</p>
-                <p style={{ fontSize: '11px', color: '#999', marginTop: '4px' }}>{source}</p>
+                <p style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', marginTop: '4px', transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>{source}</p>
             </div>
             <div style={{
                 flex: 1,
                 minHeight: '160px',
-                background: '#e8e8e8',
+                background: 'var(--color-bg-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#999',
+                color: 'var(--color-text-tertiary)',
                 fontSize: '12px',
                 overflow: 'hidden',
+                transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             }}>
                 {loading ? (
                     <span>Loading...</span>
@@ -782,7 +801,7 @@ const SlideCard = ({ title, url, source, colSpan = 2 }) => {
                         }}
                         onError={(e) => {
                             e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = '<span style="color: #999; font-size: 12px;">Thumbnail</span>';
+                            e.target.parentElement.innerHTML = '<span style="color: var(--color-text-tertiary); font-size: 12px;">Thumbnail</span>';
                         }}
                     />
                 ) : (
@@ -812,7 +831,7 @@ const PhotographyCard = ({ image, size = '1x1', placeholderText = 'Photo' }) => 
                 padding: '0',
                 aspectRatio: config.aspectRatio,
                 position: 'relative',
-                background: '#e8e8e8',
+                background: 'var(--color-bg-tertiary)',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
@@ -833,7 +852,7 @@ const PhotographyCard = ({ image, size = '1x1', placeholderText = 'Photo' }) => 
                     }}
                 />
             ) : (
-                <span style={{ color: '#999', fontSize: '12px' }}>{placeholderText}</span>
+                <span style={{ color: 'var(--color-text-tertiary)', fontSize: '12px' }}>{placeholderText}</span>
             )}
         </BentoCard>
     );
@@ -849,7 +868,8 @@ const SectionHeader = ({ title, colSpan = 4 }) => {
             <h2 style={{
                 fontSize: '18px',
                 fontWeight: '600',
-                color: '#1a1a1a',
+                color: 'var(--color-text-primary)',
+                transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             }}>{title}</h2>
         </div>
     );
@@ -958,6 +978,9 @@ export default function App() {
                     <PhotographyCard size="1x2" image="photography/trip2.png" />
                 </AnimatedSection>
             </main>
+
+            {/* Theme Toggle Button */}
+            <ThemeToggle />
         </div>
     );
 }

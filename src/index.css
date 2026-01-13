@@ -1,5 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* ============================================
+   Design Tokens / CSS Custom Properties
+   ============================================ */
+
+:root {
+  /* Light Mode Colors */
+  --color-bg-primary: #f5f5f7;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #e8e8e8;
+  --color-bg-hover: rgba(0, 0, 0, 0.04);
+
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-border-hover: rgba(0, 0, 0, 0.1);
+
+  --color-shadow: rgba(0, 0, 0, 0.04);
+  --color-shadow-hover: rgba(0, 0, 0, 0.08);
+
+  /* Brand Colors */
+  --color-twitter: #1DA1F2;
+  --color-github: #24292f;
+  --color-github-graph-0: #ebedf0;
+  --color-github-graph-1: #9be9a8;
+  --color-github-graph-2: #40c463;
+  --color-github-graph-3: #30a14e;
+  --color-github-graph-4: #216e39;
+  --color-wantedly: #21bddb;
+  --color-zenn: #3ea8ff;
+  --color-qiita: #55c500;
+
+  /* UI Elements */
+  --color-badge-bg: #f5f5f7;
+  --color-badge-border: #e0e0e0;
+  --color-label-bg: rgba(255, 255, 255, 0.95);
+
+  /* Transitions */
+  --transition-theme: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Easing Functions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  --color-bg-primary: #0d0d0f;
+  --color-bg-secondary: #1a1a1e;
+  --color-bg-tertiary: #2a2a30;
+  --color-bg-hover: rgba(255, 255, 255, 0.06);
+
+  --color-text-primary: #f0f0f2;
+  --color-text-secondary: #a0a0a5;
+  --color-text-tertiary: #707075;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
+
+  /* Brand Colors (adjusted for dark mode) */
+  --color-twitter: #1DA1F2;
+  --color-github: #f0f0f2;
+  --color-github-graph-0: #2a2a30;
+  --color-github-graph-1: #0e4429;
+  --color-github-graph-2: #006d32;
+  --color-github-graph-3: #26a641;
+  --color-github-graph-4: #39d353;
+  --color-wantedly: #21bddb;
+  --color-zenn: #3ea8ff;
+  --color-qiita: #55c500;
+
+  /* UI Elements */
+  --color-badge-bg: #2a2a30;
+  --color-badge-border: #3a3a40;
+  --color-label-bg: rgba(26, 26, 30, 0.95);
+}
+
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -12,9 +98,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f5f5f7;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: var(--transition-theme);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,5 +189,151 @@ code {
 
   .scroll-fade-section.is-visible > * {
     animation: none;
+  }
+
+  .theme-toggle-btn,
+  .theme-toggle-btn * {
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   Theme Toggle Button
+   ============================================ */
+
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary);
+  box-shadow: 0 4px 20px var(--color-shadow-hover),
+              0 0 0 1px var(--color-border);
+  transition: transform 0.3s var(--ease-out-expo),
+              box-shadow 0.3s var(--ease-out-expo),
+              background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 30px var(--color-shadow-hover),
+              0 0 0 1px var(--color-border-hover);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-twitter);
+  outline-offset: 3px;
+}
+
+/* Icon container for smooth transitions */
+.theme-toggle-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+/* Sun icon (light mode indicator) */
+.theme-toggle-sun,
+.theme-toggle-moon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.5s var(--ease-out-expo),
+              opacity 0.4s var(--ease-out-expo);
+}
+
+.theme-toggle-sun {
+  color: #f59e0b;
+}
+
+.theme-toggle-moon {
+  color: #6366f1;
+}
+
+/* Light mode: show sun, hide moon */
+:root .theme-toggle-sun,
+[data-theme="light"] .theme-toggle-sun {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+:root .theme-toggle-moon,
+[data-theme="light"] .theme-toggle-moon {
+  transform: rotate(-90deg) scale(0);
+  opacity: 0;
+}
+
+/* Dark mode: show moon, hide sun */
+[data-theme="dark"] .theme-toggle-sun {
+  transform: rotate(90deg) scale(0);
+  opacity: 0;
+}
+
+[data-theme="dark"] .theme-toggle-moon {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+/* Sun rays animation */
+.theme-toggle-btn:hover .theme-toggle-sun {
+  animation: sunPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+  }
+}
+
+/* Moon glow animation */
+[data-theme="dark"] .theme-toggle-btn:hover .theme-toggle-moon {
+  animation: moonGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(99, 102, 241, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6));
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .theme-toggle-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .theme-toggle-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .theme-toggle-sun,
+  .theme-toggle-moon {
+    width: 22px;
+    height: 22px;
   }
 }
