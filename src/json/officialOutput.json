@@ -2,19 +2,19 @@
     "data": [
         {
             "title": "ZOZOマッチアプリのメッセージ機能を支えるFlutter × GraphQLの実装",
-            "image": "zozomatch_message.png",
+            "image": "https://cdn-ak.f.st-hatena.com/images/fotolife/v/vasilyjp/20251020/20251020195205.png",
             "url": "https://techblog.zozo.com/entry/zozomatch-realtime-message",
             "date": "2025年10月"
         },
         {
             "title": "【イベントレポート】DroidKaigi 2023に参加してきました！",
-            "image": "droidkaigi2023.jpg",
+            "image": "https://cdn-ak.f.st-hatena.com/images/fotolife/v/vasilyjp/20231005/20231005181043.jpg",
             "url": "https://techblog.zozo.com/entry/droidkaigi2023-report",
             "date": "2023年9月"
         },
         {
             "title": "ZOZOTOWN AndroidチームにおけるQodanaを活用したビルドワーニングへの取り組み",
-            "image": "android_qodana.jpg",
+            "image": "https://cdn-ak.f.st-hatena.com/images/fotolife/v/vasilyjp/20230829/20230829142350.jpg",
             "url": "https://techblog.zozo.com/entry/zozotown-android-improve-build-warning",
             "date": "2023年8月"
         }

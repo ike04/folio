@@ -635,7 +635,7 @@ const setOgpCache = (url, data) => {
 };
 
 // Blog Card Component with OGP fetching (using microlink API + cache)
-const BlogCard = ({ title, url, source, colSpan = 2 }) => {
+const BlogCard = ({ title, url, source, colSpan = 2, fallbackImage }) => {
     const [ogImage, setOgImage] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -698,9 +698,9 @@ const BlogCard = ({ title, url, source, colSpan = 2 }) => {
             }}>
                 {loading ? (
                     <span>Loading...</span>
-                ) : ogImage ? (
+                ) : (ogImage || fallbackImage) ? (
                     <img
-                        src={ogImage}
+                        src={ogImage || fallbackImage}
                         alt={title}
                         style={{
                             width: '100%',
@@ -708,8 +708,12 @@ const BlogCard = ({ title, url, source, colSpan = 2 }) => {
                             objectFit: 'cover',
                         }}
                         onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = '<span style="color: var(--color-text-tertiary); font-size: 12px;">Thumbnail</span>';
+                            if (ogImage && fallbackImage && e.target.src !== fallbackImage) {
+                                e.target.src = fallbackImage;
+                            } else {
+                                e.target.style.display = 'none';
+                                e.target.parentElement.innerHTML = '<span style="color: var(--color-text-tertiary); font-size: 12px;">Thumbnail</span>';
+                            }
                         }}
                     />
                 ) : (
@@ -952,6 +956,7 @@ export default function App() {
                             url={item.url}
                             source={new URL(item.url).hostname}
                             colSpan={2}
+                            fallbackImage={item.image}
                         />
                     ))}
                 </AnimatedSection>
