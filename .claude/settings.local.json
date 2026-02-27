@@ -2,6 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npm install)",
+      "WebFetch(domain:bento.me)",
+      "WebSearch",
+      "WebFetch(domain:microlink.io)",
+      "WebFetch(domain:github-contributions-api.jogruber.de)",
+      "WebFetch(domain:zenn.dev)",
+      "Bash(chmod:*)",
+      "WebFetch(domain:api.microlink.io)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
       "Bash(npx serve -s build -p 3001)",
       "WebFetch(domain:github.com)"
     ],
